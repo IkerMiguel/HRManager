@@ -1,3 +1,6 @@
+using HRManager.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace HRManager
 {
 	public class Program
@@ -10,6 +13,10 @@ namespace HRManager
 			builder.Services.AddRazorPages();
 
 			var app = builder.Build();
+
+			builder.Services.AddDbContext<ManagerContext>(options =>
+				options.UseSqlServer(builder.Configuration.GetConnectionString("HRManagerDB"))
+			);
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
