@@ -12,11 +12,11 @@ namespace HRManager
 			// Add services to the container.
 			builder.Services.AddRazorPages();
 
-			var app = builder.Build();
-
 			builder.Services.AddDbContext<ManagerContext>(options =>
-				options.UseSqlServer(builder.Configuration.GetConnectionString("HRManagerDB"))
+				options.UseSqlServer(builder.Configuration.GetConnectionString("ManagerDB"))
 			);
+
+			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())

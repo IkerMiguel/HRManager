@@ -5,7 +5,7 @@ namespace HRManager.Data
 {
 	public class ManagerContext : DbContext
 	{
-		public ManagerContext(DbContextOptions options) : base(options)
+		public ManagerContext(DbContextOptions options) : base(options) 
 		{
 		}
 
