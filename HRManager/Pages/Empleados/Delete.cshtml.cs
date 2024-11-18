@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace HRManager.Pages.Departamentos
+namespace HRManager.Pages.Empleados
 {
     public class DeleteModel : PageModel
     {
@@ -16,44 +16,41 @@ namespace HRManager.Pages.Departamentos
         }
 
         [BindProperty]
-        public Departamento Departamento { get; set; } = default!;
+        public Empleado Empleado { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Departamentos == null)
+            if (id == null || _context.Empleados == null)
             {
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (departamento == null)
+            Empleado = await _context.Empleados
+                .Include(p => p.Departamento)
+                .Include(p => p.Cargo)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (Empleado == null)
             {
                 return NotFound();
-            }
-            else
-            {
-                Departamento = departamento;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Departamentos == null)
+            if (id == null || _context.Empleados == null)
             {
                 return NotFound();
             }
-
-            var departamento = await _context.Departamentos.FindAsync(id);
-
-            if (departamento != null)
+            var empleado = await _context.Empleados.FindAsync(id);
+            if (empleado != null)
             {
-                Departamento = departamento;
-                _context.Departamentos.Remove(departamento);
+                Empleado = empleado;
+                _context.Empleados.Remove(Empleado);
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToPage("./Index");
         }
     }
