@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRManager.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class juan : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,11 +65,9 @@ namespace HRManager.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaContratacion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdDepartamento = table.Column<int>(type: "int", nullable: false),
-                    DepartamentoId = table.Column<int>(type: "int", nullable: true),
+                    DepartamentoId = table.Column<int>(type: "int", nullable: false),
                     Salario = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
-                    IdCargo = table.Column<int>(type: "int", nullable: false),
-                    CargoId = table.Column<int>(type: "int", nullable: true)
+                    CargoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,12 +76,14 @@ namespace HRManager.Migrations
                         name: "FK_Empleados_Cargos_CargoId",
                         column: x => x.CargoId,
                         principalTable: "Cargos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Empleados_Departamentos_DepartamentoId",
                         column: x => x.DepartamentoId,
                         principalTable: "Departamentos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
