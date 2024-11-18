@@ -1,0 +1,40 @@
+﻿@page
+@model HRManager.Pages.Cargos.CreateModel
+@{
+    ViewData["Title"] = "Create Cargo";
+}
+<h1>Create Cargo</h1>
+<h4>Cargo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- TituloCargo -->
+            <div class="form-group">
+                <label asp-for="Cargo.TituloCargo" class="control-label"></label>
+                <input asp-for="Cargo.TituloCargo" class="form-control" />
+                <span asp-validation-for="Cargo.TituloCargo" class="text-danger"></span>
+            </div>
+
+            <!-- Descripcion -->
+            <div class="form-group">
+                <label asp-for="Cargo.Descripcion" class="control-label"></label>
+                <input asp-for="Cargo.Descripcion" class="form-control" />
+                <span asp-validation-for="Cargo.Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-page="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
