@@ -1,0 +1,35 @@
+﻿@page
+@model HRManager.Pages.Departamentos.IndexModel
+@{
+    ViewData["Title"] = "Index Departamentos";
+}
+<h1>Index Departamentos</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Crear Nuevo Departamento</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Departamentos[0].NombreDepartamento)</th>
+            <th>@Html.DisplayNameFor(model => model.Departamentos[0].Ubicacion)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Departamentos)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.NombreDepartamento)</td>
+                <td>@Html.DisplayFor(modelItem => item.Ubicacion)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

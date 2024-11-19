@@ -1,0 +1,86 @@
+﻿@page
+@model HRManager.Pages.Empleados.CreateModel
+@{
+    ViewData["Title"] = "Create Empleado";
+}
+<h1>Create Empleado</h1>
+<h4>Empleado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="Empleado.Nombre" class="control-label"></label>
+                <input asp-for="Empleado.Nombre" class="form-control" />
+                <span asp-validation-for="Empleado.Nombre" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Empleado.Apellido" class="control-label"></label>
+                <input asp-for="Empleado.Apellido" class="form-control" />
+                <span asp-validation-for="Empleado.Apellido" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Empleado.Email" class="control-label"></label>
+                <input asp-for="Empleado.Email" class="form-control" />
+                <span asp-validation-for="Empleado.Email" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Empleado.Telefono" class="control-label"></label>
+                <input asp-for="Empleado.Telefono" class="form-control" />
+                <span asp-validation-for="Empleado.Telefono" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Empleado.FechaContratacion" class="control-label"></label>
+                <input asp-for="Empleado.FechaContratacion" type="date" class="form-control" />
+                <span asp-validation-for="Empleado.FechaContratacion" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Empleado.Salario" class="control-label"></label>
+                <input asp-for="Empleado.Salario" class="form-control" type="number" step="0.01" min="0" max="1000000000" />
+                <span asp-validation-for="Empleado.Salario" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Empleado.DepartamentoId" class="control-label"></label>
+                <select asp-for="Empleado.DepartamentoId" asp-items="@(new SelectList(Model.Departamentos, "Id", "NombreDepartamento"))" class="form-control">
+                    <option value="">Select Departamento</option>
+                </select>
+                <span asp-validation-for="Empleado.DepartamentoId" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Empleado.CargoId" class="control-label"></label>
+                <select asp-for="Empleado.CargoId" asp-items="@(new SelectList(Model.Cargos, "Id", "TituloCargo"))" class="form-control">
+                    <option value="">Select Cargo</option>
+                </select>
+                <span asp-validation-for="Empleado.CargoId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-page="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManager.Migrations
 {
     [DbContext(typeof(ManagerContext))]
-    [Migration("20241118040253_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241118212714_juan")]
+    partial class juan
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,10 +100,10 @@ namespace HRManager.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CargoId")
+                    b.Property<int>("CargoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DepartamentoId")
+                    b.Property<int>("DepartamentoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -112,12 +112,6 @@ namespace HRManager.Migrations
 
                     b.Property<DateTime>("FechaContratacion")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdCargo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDepartamento")
-                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -173,11 +167,15 @@ namespace HRManager.Migrations
                 {
                     b.HasOne("HRManager.Models.Cargo", "Cargo")
                         .WithMany("Empleados")
-                        .HasForeignKey("CargoId");
+                        .HasForeignKey("CargoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HRManager.Models.Departamento", "Departamento")
                         .WithMany("Empleados")
-                        .HasForeignKey("DepartamentoId");
+                        .HasForeignKey("DepartamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cargo");
 
