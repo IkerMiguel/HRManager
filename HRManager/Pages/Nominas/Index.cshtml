@@ -1,0 +1,41 @@
+﻿@page
+@model HRManager.Pages.Nominas.IndexModel
+@{
+    ViewData["Title"] = "Index Nóminas";
+}
+<h1>Index Nóminas</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Crear Nueva Nómina</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>@Html.DisplayNameFor(model => model.Nominas[0].PeriodoInicio)</th>
+            <th>@Html.DisplayNameFor(model => model.Nominas[0].PeriodoFin)</th>
+            <th>@Html.DisplayNameFor(model => model.Nominas[0].TotalPagado)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Nominas)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Empleado.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.PeriodoInicio)</td>
+                <td>@Html.DisplayFor(modelItem => item.PeriodoFin)</td>
+                <td>@Html.DisplayFor(modelItem => item.TotalPagado)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
