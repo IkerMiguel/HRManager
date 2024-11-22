@@ -1,0 +1,36 @@
+﻿@page
+@model HRManager.Pages.Cargos.IndexModel
+@{
+    ViewData["Title"] = "Index Cargos";
+}
+<h1>Index Cargos</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Crear Nuevo Cargo</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Cargos[0].TituloCargo)</th>
+            <th>@Html.DisplayNameFor(model => model.Cargos[0].Descripcion)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cargos)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TituloCargo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

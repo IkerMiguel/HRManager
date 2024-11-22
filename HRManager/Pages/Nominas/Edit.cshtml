@@ -1,0 +1,54 @@
+﻿@page
+@model HRManager.Pages.Nominas.EditModel
+@{
+    ViewData["Title"] = "Edit Nomina";
+}
+<h1>Edit Nomina</h1>
+
+<h4>Nomina</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Nomina.Id" />
+
+            <div class="form-group">
+                <label asp-for="Nomina.EmpleadoId" class="control-label"></label>
+                <select asp-for="Nomina.EmpleadoId" class="form-control" asp-items="@(new SelectList(Model.Empleados, "Id", "Nombre"))"></select>
+                <span asp-validation-for="Nomina.EmpleadoId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Nomina.PeriodoInicio" class="control-label"></label>
+                <input asp-for="Nomina.PeriodoInicio" class="form-control" type="date" />
+                <span asp-validation-for="Nomina.PeriodoInicio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Nomina.PeriodoFin" class="control-label"></label>
+                <input asp-for="Nomina.PeriodoFin" class="form-control" type="date" />
+                <span asp-validation-for="Nomina.PeriodoFin" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Nomina.TotalPagado" class="control-label"></label>
+                <input asp-for="Nomina.TotalPagado" class="form-control" type="number" step="0.01" min="0" max="1000000000" />
+                <span asp-validation-for="Nomina.TotalPagado" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

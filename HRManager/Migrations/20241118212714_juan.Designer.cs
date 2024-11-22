@@ -4,6 +4,7 @@ using HRManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManager.Migrations
 {
     [DbContext(typeof(ManagerContext))]
-    partial class ManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20241118212714_juan")]
+    partial class juan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +118,7 @@ namespace HRManager.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Salario")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(6,2)");
 
                     b.Property<string>("Telefono")
                         .IsRequired()
@@ -138,7 +141,10 @@ namespace HRManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EmpleadoId")
+                    b.Property<int?>("EmpleadoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEmpleado")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PeriodoFin")
@@ -148,7 +154,7 @@ namespace HRManager.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalPagado")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(6,2)");
 
                     b.HasKey("Id");
 
@@ -180,9 +186,7 @@ namespace HRManager.Migrations
                 {
                     b.HasOne("HRManager.Models.Empleado", "Empleado")
                         .WithMany("Nominas")
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmpleadoId");
 
                     b.Navigation("Empleado");
                 });

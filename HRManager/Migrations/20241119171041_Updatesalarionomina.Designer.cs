@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManager.Migrations
 {
     [DbContext(typeof(ManagerContext))]
-    [Migration("20241118040253_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241119171041_Updatesalarionomina")]
+    partial class Updatesalarionomina
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,10 +100,10 @@ namespace HRManager.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CargoId")
+                    b.Property<int>("CargoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DepartamentoId")
+                    b.Property<int>("DepartamentoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -113,18 +113,12 @@ namespace HRManager.Migrations
                     b.Property<DateTime>("FechaContratacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdCargo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDepartamento")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Salario")
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Telefono")
                         .IsRequired()
@@ -147,10 +141,7 @@ namespace HRManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("EmpleadoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEmpleado")
+                    b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PeriodoFin")
@@ -160,7 +151,7 @@ namespace HRManager.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalPagado")
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -173,11 +164,15 @@ namespace HRManager.Migrations
                 {
                     b.HasOne("HRManager.Models.Cargo", "Cargo")
                         .WithMany("Empleados")
-                        .HasForeignKey("CargoId");
+                        .HasForeignKey("CargoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HRManager.Models.Departamento", "Departamento")
                         .WithMany("Empleados")
-                        .HasForeignKey("DepartamentoId");
+                        .HasForeignKey("DepartamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cargo");
 
@@ -188,7 +183,9 @@ namespace HRManager.Migrations
                 {
                     b.HasOne("HRManager.Models.Empleado", "Empleado")
                         .WithMany("Nominas")
-                        .HasForeignKey("EmpleadoId");
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Empleado");
                 });
