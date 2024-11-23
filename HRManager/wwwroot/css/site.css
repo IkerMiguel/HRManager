@@ -19,4 +19,17 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-image: url("../img/backGR.jpg")
+}
+
+.bg-pastel-pink {
+    background-color: #ff90ff;
+}
+
+.bg-pastel-green {
+    background-color: #73eba3;
+}
+
+.bg-pastel-blue {
+    background-color: #2297fd;
 }
