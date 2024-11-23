@@ -15,6 +15,11 @@ namespace HRManager
 			builder.Services.AddDbContext<ManagerContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("ManagerDB"))
 			);
+			builder.Services.AddAuthentication().AddCookie("MyCookieAuth", option =>
+			{
+				option.Cookie.Name = "MyCookieAuth";
+				option.LoginPath = "/Account/Login";
+			});
 
 			var app = builder.Build();
 
