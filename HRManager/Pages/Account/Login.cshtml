@@ -2,31 +2,30 @@
 @model HRManager.Pages.Account.LoginModel
 @{
 }
-<form method="post">
-    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control"
-               asp-for="User.Email"
-               id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        <div>
-            <span class="text-danger" asp-validation-for="User.Email"></span>
+<div class="container my-5">
+    <div class="row justify-content-center p-4 pb-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+        <div class="col-lg-6 col-md-8 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis text-center">Login</h1>
+            <form method="post">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" asp-for="User.Email" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <div><span class="text-danger" asp-validation-for="User.Email"></span></div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" asp-for="User.Password" id="exampleInputPassword1">
+                    <div><span class="text-danger" asp-validation-for="User.Password"></span></div>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <a asp-page="Register" class="btn btn-success w-100 mt-3">Register</a>
+            </form>
         </div>
     </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control"
-               asp-for="User.Password"
-               id="exampleInputPassword1">
-    </div>
-    <div>
-        <span class="text-danger" asp-validation-for="User.Password"></span>
-    </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <a asp-page="Register" class="btn btn-success">Register</a>
-</form>
+</div>
